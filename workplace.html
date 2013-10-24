@@ -42,4 +42,12 @@ data$clean_number_guns <- gsub(",", " ", data$number_guns)
 as.numeric(data$clean_number_guns)
 data$clean_number_guns <- as.numeric(data$clean_number_guns)
 
+# uploaded census info about population by county
+# formatted both datasets to have the same county names by converting all to uppercase, killing spaces, and matching abbreviations for "Saint"
+# merged gun data with population data
+# uploaded shape file for counties in Illinois
+# formatted each county name individually, since mass actions didn't work for some reason
+# merged shape data with other merge
+# plotted as map after assigning color to number of crime-related guns purchased per 100,000 people
+
 
