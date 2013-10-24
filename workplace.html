@@ -1,0 +1,45 @@
+# load data and make sure it reads in the correct format
+data <- read.delim("county-data.txt")
+data <-read.delim("county-data.txt", header=F)
+
+#to make sure factors aren't ever a problem again
+data <- read.delim("county-data.txt", header=F, stringsAsFactors = FALSE)
+options(stringsAsFactors = FALSE)
+
+names(data) <- c("county", "number_guns")
+
+# make the first item on the list a test to check your splits later
+test <- "ACCOMACK(VA)"
+
+# split the string between county and state and get rid of that (
+strsplit(test, split="\\(")
+class(split)
+
+#that split us between state and county
+get_second_item <- function(county){
+return (county [2])
+}
+
+# to get the second item out of the data
+sapply(split_county_data, FUN=get_second_item)
+
+# making the second column of the states clean
+data$clean_states <- sapply(split_county_data, FUN=get_second_item)
+
+# getting just the county name
+get_first_item <- function(county){
+return (county [1])
+}
+data$clean_county <- sapply(split_county_data, FUN=get_first_item)
+
+# to get the end parenthesis out of the clean_states column
+gsub("\\)", " ", data$clean_states)
+data$very_clean_states <- gsub("\\)", " ", data$clean_states)
+
+# take out the commas in the number_guns
+gsub(",", " ", data$number_guns)
+data$clean_number_guns <- gsub(",", " ", data$number_guns)
+as.numeric(data$clean_number_guns)
+data$clean_number_guns <- as.numeric(data$clean_number_guns)
+
+
